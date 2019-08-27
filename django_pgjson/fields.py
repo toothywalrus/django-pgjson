@@ -11,7 +11,6 @@ import psycopg2.extras
 
 from django import forms
 from django.db import models
-from django.db.backends.postgresql_psycopg2.version import get_version
 from django.conf import settings
 from django.utils import six
 
@@ -19,6 +18,10 @@ if django.VERSION >= (1, 7):
     from django.utils.module_loading import import_string
 else:
     from django.utils.module_loading import import_by_path as import_string
+
+
+def get_version(connection):
+    return connection.server_version
 
 
 def get_encoder_class():
